@@ -1,0 +1,9 @@
+app.post('/profile', (req, res) => {
+  const { name, email, resumeUrl } = req.body;
+  db.query('INSERT INTO candidates (name, email, resume_url) VALUES (?, ?, ?)',
+    [name, email, resumeUrl],
+    (err, result) => {
+      if (err) throw err;
+      res.json({ success: true, id: result.insertId });
+    });
+});
